@@ -22,4 +22,16 @@ class Node
     array
   end
 
+  def leaf_node?
+    self.children == []
+  end
+
+  def sibling_values
+    result = []
+    @children.each do |child|
+      result << child.data
+    end
+    result
+  end
+
 end

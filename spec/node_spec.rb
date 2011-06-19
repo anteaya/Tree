@@ -71,12 +71,27 @@ describe Node do
       array = [Node.new("apple"), Node.new("banana")]
       node = Node.new("fruit bowl", [array, Node.new("orange"), Node.new("strawberry")].flatten)
       node.children.length.should == 4
-      puts node.children.inspect
       node.remove_children(array)
-      puts node.children.inspect
       node.children[0].data.should == "orange"
       node.children[1].data.should == "strawberry"
       node.children.length.should == 2
+    end
+  end
+
+  context "#leaf_node?" do
+    it "takes a node and returns true if the node has no children" do
+      node = Node.new("leaf node")
+      node.leaf_node?.should == true
+    end
+  end
+
+  context "#sibling_values" do
+    it "takes a node and returns an array" do
+      first_sibling = Node.new("Bart")
+      second_sibling = Node.new("Lisa")
+      third_sibling = Node.new("Maggie")
+      node = Node.new("Homer", [first_sibling, second_sibling, third_sibling])
+      node.sibling_values.should == ["Bart", "Lisa", "Maggie"]
     end
   end
 
